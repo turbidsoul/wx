@@ -1,4 +1,4 @@
-#coding: utf8
+# coding: utf8
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -16,23 +16,36 @@
 # limitations under the License.
 #
 import webapp2
-from util import checkSignure
+from util import checkSignure, parse_messsage, generate_reply
+
+token = 'wxturbidsoul'
 
 
 class WXChartHandler(webapp2.RequestHandler):
     def get(self):
-        token = 'wxturbidsoul'
+        global token
         signature = self.request.get('signature')
         timestamp = self.request.get('timestamp')
         nonce = self.request.get('nonce')
         echostr = self.request.get('echostr')
-        args = [token, timestamp, nonce]
-        args.sort()
         if checkSignure(token, timestamp, nonce, signature):
             self.response.write(echostr)
         else:
-            self.response.write('403')
+            webapp2.abort(403)
 
+    def post(self):
+        global token
+        _args = dict(
+            token=token,
+            timestamp=self.request.get('timestamp'),
+            nonce=self.request.get('nonce'),
+            signature=self.request.get('signature')
+        )
+        if not checkSignure(**_args):
+            return webapp2.abort(403)
+        message = parse_messsage(str(self.request.body))
+        reply = generate_reply(message)
+        self.response.write(reply)
 
 app = webapp2.WSGIApplication([('/', WXChartHandler)],
                               debug=True)
