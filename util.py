@@ -5,6 +5,7 @@ from message import TextMessage
 import xml.etree.ElementTree as et
 from xml.etree.ElementTree import Element, SubElement
 from time import time
+import logging
 
 
 def checkSignure(token, timestamp, nonce, signature):
@@ -14,21 +15,34 @@ def checkSignure(token, timestamp, nonce, signature):
     return sha1("".join(args)).hexdigest() == signature
 
 
+def to_unicode(value):
+    if isinstance(value, unicode):
+        return value
+    if isinstance(value, basestring):
+        return value.decode('utf-8')
+    if isinstance(value, int):
+        return str(value)
+    if isinstance(value, bytes):
+        return value.decode('utf-8')
+    return value
+
+
 def parse_messsage(xml):
     '''Parse from weixin receive xml to message '''
     if not xml:
         return
 
-    msg = dict((c.tag, c.text.decode('utf-8')) for c in et.fromstring(xml))
+    root = et.fromstring(xml.decode('utf8'))
     _msg = dict(
-        touser=msg['ToUserName'] or 'none',
-        fromuser=msg['FromUserName'],
-        create_time=msg['CreateTime'],
-        msg_type=msg['MsgType'],
-        msg_id=msg['MsgId']
+        touser=root.find('ToUserName').text,
+        fromuser=root.find('FromUserName').text,
+        create_time=root.find('CreateTime').text,
+        msg_type=root.find('MsgType').text,
+        msg_id=root.find('MsgId')
     )
     if _msg['msg_type'] == 'text':
-        _msg['content'] = msg.get('Content')
+        logging.info(root.find('Content').text)
+        _msg['content'] = root.find('Content').text
         return TextMessage(**_msg)
     else:
         return
@@ -51,5 +65,5 @@ def generate_reply(msg):
     funcflag.text = '0'
     if msg.msg_type == 'text':
         content = SubElement(root, 'Content')
-        content.text = msg.content.decode('utf8')
+        content.text = msg.content
     return et.tostring(root)

@@ -1,0 +1,1 @@
+python "F:\server\google_appengine\dev_appserver.py" ../wx

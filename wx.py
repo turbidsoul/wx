@@ -16,6 +16,7 @@
 # limitations under the License.
 #
 import webapp2
+import logging
 from util import checkSignure, parse_messsage, generate_reply
 
 token = 'wxturbidsoul'
@@ -29,8 +30,10 @@ class WXChartHandler(webapp2.RequestHandler):
         nonce = self.request.get('nonce')
         echostr = self.request.get('echostr')
         if checkSignure(token, timestamp, nonce, signature):
+            logging.info("connection wx rebot success")
             self.response.write(echostr)
         else:
+            logging.info("connection wx rebo fail")
             webapp2.abort(403)
 
     def post(self):
@@ -43,7 +46,10 @@ class WXChartHandler(webapp2.RequestHandler):
         )
         if not checkSignure(**_args):
             return webapp2.abort(403)
-        message = parse_messsage(str(self.request.body))
+        logging.info("=============== wx.py at line 47 ===============")
+        logging.info(self.request.body)
+        message = parse_messsage(self.request.body)
+        logging.info(message)
         reply = generate_reply(message)
         self.response.write(reply)
 
