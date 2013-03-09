@@ -1,4 +1,3 @@
-# coding: utf8
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -46,11 +45,11 @@ class WXChartHandler(webapp2.RequestHandler):
         )
         if not checkSignure(**_args):
             return webapp2.abort(403)
-        logging.info("=============== wx.py at line 47 ===============")
-        logging.info(self.request.body)
         message = parse_messsage(self.request.body)
-        logging.info(message)
         reply = generate_reply(message)
+        logging.info("=============== wx.py at line 50 ===============")
+        logging.info(reply)
+        self.response.content_type = 'application/xml'
         self.response.write(reply)
 
 app = webapp2.WSGIApplication([('/', WXChartHandler)],
