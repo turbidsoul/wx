@@ -48,33 +48,18 @@ def parse_messsage(xml):
     else:
         return
 
-text_template = """<xml>
-<ToUserName><![CDATA[%s]]</ToUserName>
-<FromUserName><![CDATA[%s]]</FromUserName>
+text_template = '''<xml>
+<ToUserName>%s</ToUserName>
+<FromUserName>%s</FromUserName>
 <CreateTime>%s</CreateTime>
-<MsgType><![CDATA[%s]]></MsgType>
+<MsgType>%s</MsgType>
 <FuncFlag>%s</FuncFlag>
-<Content><![CDATA[%s]]></Content></xml>"""
+<Content>%s</Content></xml>'''
 
 
 def generate_reply(msg):
     '''generate reply xml'''
-    # root = Element('xml')
-    # touser = SubElement(root, 'ToUserName')
-    # touser.text = msg.fromuser
-    # fromuser = SubElement(root, 'FromUserName')
-    # fromuser.text = msg.touser
-    # createtime = SubElement(root, 'CreateTime')
-    # t = str(time())
-    # t = t[:len(t) - 3]
-    # createtime.text = t
-    # msgtype = SubElement(root, 'MsgType')
-    # msgtype.text = msg.msg_type
-    # funcflag = SubElement(root, 'FuncFlag')
-    # funcflag.text = '0'
     if msg.msg_type == 'text':
-        # content = SubElement(root, 'Content')
-        # content.text = "<![CDATA[" + to_unicode(msg.content) + "]]>"
         t = str(time())
         t = t[:len(t) - 3]
         return text_template % (msg.fromuser, msg.touser, t, msg.msg_type, '0', to_unicode(msg.content))

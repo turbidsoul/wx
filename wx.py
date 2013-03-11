@@ -16,7 +16,7 @@
 #
 import webapp2
 import logging
-from util import checkSignure, parse_messsage, generate_reply
+from util import checkSignure, parse_messsage, generate_reply, to_unicode
 
 token = 'wxturbidsoul'
 
@@ -50,7 +50,7 @@ class WXChartHandler(webapp2.RequestHandler):
         logging.info("=============== wx.py at line 50 ===============")
         logging.info(reply)
         self.response.content_type = 'application/xml'
-        self.response.write(reply)
+        self.response.write(to_unicode(reply))
 
 app = webapp2.WSGIApplication([('/', WXChartHandler)],
                               debug=True)

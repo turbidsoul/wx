@@ -1,7 +1,6 @@
 # coding: utf8
 import httplib
 import hashlib
-import urllib
 
 
 headers = {
@@ -9,13 +8,12 @@ headers = {
 }
 
 xml = """<xml>
-<ToUserName><![CDATA[to user name]]</ToUserName>
-<FromUserName><![CDATA[from user name]]</FromUserName>
+<ToUserName>to user name</ToUserName>
+<FromUserName>from user name</FromUserName>
 <CreateTime>12345678</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[asdf]]></Content>
+<MsgType>text</MsgType>
+<Content>奥斯丁</Content>
 <MsgId>123456788</MsgId></xml>"""
-xml = urllib.urlencode(xml)
 
 timestamp = "12345678"
 nonce = "1234"
