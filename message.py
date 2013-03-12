@@ -3,8 +3,11 @@
 
 class Message(object):
     """Wei chart super class"""
-    def init(self):
-        pass
+    def __init__(self, touser, fromuser, create_time, msg_id):
+        self.touser = touser
+        self.fromuser = fromuser
+        self.create_time = int(create_time)
+        self.msg_id = int(msg_id)
 
 
 class TextMessage(Message):
@@ -22,14 +25,11 @@ class TextMessage(Message):
     content - 文本消息内容
     """
     def __init__(self, touser, fromuser, create_time, msg_id, content):
-        self.touser = touser
-        self.fromuser = fromuser
-        self.create_time = create_time
-        self.msg_type = "text"
-        self.msg_id = msg_id
+        super(TextMessage, self).__init__(touser, fromuser, create_time, msg_id)
         self.content = content
         if self.content == 'Hello2BizUser':
             self.msg_type = 'hello'
+        self.msg_type = "text"
 
 
 class ImageMessage(Message):
@@ -39,10 +39,6 @@ class ImageMessage(Message):
     pic_url - 图片连接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, pic_url):
-        self.touser = touser
-        self.fromuser = fromuser
-        self.create_time = create_time
-        self.msg_id = msg_id
         self.msg_type = "image"
         self.pic_url = pic_url
 
@@ -58,11 +54,7 @@ class LinkMessage(Message):
     url - 消息链接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, title, description, url):
-        self.touser = touser
-        self.fromuser = fromuser
-        self.create_time = create_time
         self.msg_type = "link"
-        self.msg_id = msg_id
         self.title = title
         self.description = description
         self.url = url
@@ -81,11 +73,7 @@ class LocationMessage(Message):
     label - 地理位置信息
     """
     def __init__(self, tosuer, fromuser, create_time, msg_id, x, y, scale, label):
-        self.tosuer = tosuer
-        self.fromuser = fromuser
-        self.create_time = create_time
         self.msg_type = "location"
-        self.msg_id = msg_id
         self.x = x
         self.y = y
         self.scale = scale
@@ -104,11 +92,7 @@ class EventMessage(Message):
     """
     def __init__(self, touser, fromuser, create_time, msg_id, event, latitude, longitude, precision):
         super(EventMessage, self).__init__()
-        self.touser = touser
-        self.fromuser = fromuser
-        self.create_time = create_time
         self.msg_type = "event"
-        self.msg_id = msg_id
         self.event = event
         self.latitude = latitude
         self.longitude = longitude

@@ -37,10 +37,9 @@ def parse_messsage(xml):
         touser=root.find('ToUserName').text,
         fromuser=root.find('FromUserName').text,
         create_time=root.find('CreateTime').text,
-        msg_type=root.find('MsgType').text,
         msg_id=root.find('MsgId')
     )
-    if _msg['msg_type'] == 'text':
+    if root.find('MsgType').text == 'text':
         logging.info(root.find('Content').text)
         _msg['content'] = to_unicode(root.find('Content').text)
         logging.info(_msg['content'])
