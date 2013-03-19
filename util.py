@@ -1,7 +1,7 @@
 # coding: utf8
 
 from hashlib import sha1
-from message import TextMessage
+from message import TextMessage, ImageMessage, LinkMessage, LocationMessage, EventMessage
 import xml.etree.cElementTree as et
 import logging
 
@@ -37,8 +37,21 @@ def parse_messsage(xml):
         create_time=root.find('CreateTime').text,
         msg_id=root.find('MsgId').text
     )
-    if root.find('MsgType').text == 'text':
+    msg_type = root.find('MsgType').text
+    if msg_type == 'text':
         _msg['content'] = to_unicode(root.find('Content').text)
         return TextMessage(**_msg)
-    else:
-        return
+    elif msg_type == 'image':
+        _msg['pic_url'] = root.find('PicUrl').text
+        return ImageMessage(**_msg)
+    elif msg_type == 'location':
+        _msg['x'] = root.find('Location_x').text
+        _msg['y'] = root.find('Location_y').text
+        _msg['scale'] = root.find('Scale').text
+        _msg['label'] = to_unicode(root.find('Label').text)
+        return LocationMessage(**_msg)
+    elif msg_type == 'link':
+        _msg['title'] = to_unicode(root.find('Title').text)
+        _msg['description'] = to_unicode(root.find('Description').text)
+        _msg['url'] = root.find('Url').text;
+        return LinkMessage(**_msg)

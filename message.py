@@ -84,16 +84,12 @@ class EventMessage(Message):
     """
     Event push message
 
-    event - 事件类型，有ENTER(进入会话)和LOCATION(地理位置)
+    event - 事件类型，有subscribe(订阅), unsubscribe(取消订阅)， CLICK(自定义菜单点击事件)
 
-    latitude - 地理位置纬度， event=LOCATION 时有效
-    longitude - 地理位置经度， event=LOCATION 时有效
-    precision - 地理位置精度， event=LOCATION 时有效
+    event_key - 时间Key值，对应自定义菜单中的Key
     """
-    def __init__(self, touser, fromuser, create_time, msg_id, event, latitude, longitude, precision):
+    def __init__(self, touser, fromuser, create_time, msg_id, event, event_key):
         super(EventMessage, self).__init__()
         self.msg_type = "event"
         self.event = event
-        self.latitude = latitude
-        self.longitude = longitude
-        self.precision = precision
+        self.event_key = event_key
