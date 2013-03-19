@@ -53,5 +53,9 @@ def parse_messsage(xml):
     elif msg_type == 'link':
         _msg['title'] = to_unicode(root.find('Title').text)
         _msg['description'] = to_unicode(root.find('Description').text)
-        _msg['url'] = root.find('Url').text;
+        _msg['url'] = root.find('Url').text
         return LinkMessage(**_msg)
+    elif msg_type == 'event':
+        _msg['event'] = root.find('Event').text
+        _msg['event_key'] = root.find('EventKey').text
+        return EventMessage(**_msg)

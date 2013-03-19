@@ -93,3 +93,10 @@ class EventMessage(Message):
         self.msg_type = "event"
         self.event = event
         self.event_key = event_key
+
+
+class ErrorMessage(object):
+    """错误消息"""
+    def __init__(self, errcode, errmsg):
+        self.errcode = errcode
+        self.errmsg = errmsg
