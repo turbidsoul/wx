@@ -7,13 +7,13 @@ headers = {
     "Content-Type": "application/xml"
 }
 
-xml = """<xml>
-<ToUserName>to user name</ToUserName>
-<FromUserName>from user name</FromUserName>
-<CreateTime>12345678</CreateTime>
-<MsgType>text</MsgType>
-<Content>奥斯丁</Content>
-<MsgId>123456788</MsgId></xml>"""
+xml = """<xml><ToUserName><![CDATA[gh_081abfe3962c]]></ToUserName>
+<FromUserName><![CDATA[oCT3bjgZ2GysH7vAz9sJK32DHZAs]]></FromUserName>
+<CreateTime>1363672441</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[嗨喽]]></Content>
+<MsgId>5856928536551489598</MsgId>
+</xml>"""
 
 timestamp = "12345678"
 nonce = "1234"
@@ -28,5 +28,3 @@ conn.request(method='POST', url=url, body=xml, headers=headers)
 response = conn.getresponse()
 print response.read()
 conn.close()
-
-

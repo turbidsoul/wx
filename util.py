@@ -3,8 +3,6 @@
 from hashlib import sha1
 from message import TextMessage
 import xml.etree.cElementTree as et
-from xml.etree.cElementTree import Element, SubElement
-from time import time
 import logging
 
 
@@ -37,29 +35,10 @@ def parse_messsage(xml):
         touser=root.find('ToUserName').text,
         fromuser=root.find('FromUserName').text,
         create_time=root.find('CreateTime').text,
-        msg_id=root.find('MsgId')
+        msg_id=root.find('MsgId').text
     )
     if root.find('MsgType').text == 'text':
-        logging.info(root.find('Content').text)
         _msg['content'] = to_unicode(root.find('Content').text)
-        logging.info(_msg['content'])
         return TextMessage(**_msg)
     else:
         return
-
-text_template = '''<xml>
-<ToUserName>%s</ToUserName>
-<FromUserName>%s</FromUserName>
-<CreateTime>%s</CreateTime>
-<MsgType>%s</MsgType>
-<FuncFlag>%s</FuncFlag>
-<Content>%s</Content></xml>'''
-
-
-def generate_reply(msg):
-    '''generate reply xml'''
-    if msg.msg_type == 'text':
-        t = str(time())
-        t = t[:len(t) - 3]
-        return text_template % (msg.fromuser, msg.touser, t, msg.msg_type, '0', to_unicode(msg.content))
-    return
