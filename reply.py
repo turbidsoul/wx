@@ -155,4 +155,12 @@ def generate_reply(msg):
         args['content'] = msg.content
         logging.info(args)
         return TextReply(**args)
+    if msg.msg_type == "event":
+        if msg.event == "subscribe":
+            args['content'] = "欢迎关注俺，俺是个机器人！"
+            return TextReply(**args)
+        elif msg.event == "unsubscribe":
+            pass
+        elif msg.event == "CLICK":
+            pass
     return

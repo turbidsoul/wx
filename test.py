@@ -10,9 +10,9 @@ headers = {
 xml = """<xml><ToUserName><![CDATA[gh_081abfe3962c]]></ToUserName>
 <FromUserName><![CDATA[oCT3bjgZ2GysH7vAz9sJK32DHZAs]]></FromUserName>
 <CreateTime>1363672441</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[嗨喽]]></Content>
-<MsgId>5856928536551489598</MsgId>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[subscribe]]></Event>
+<EventKey>aaaaaaaaaaaaaa</EventKey>
 </xml>"""
 
 timestamp = "12345678"

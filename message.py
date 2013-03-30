@@ -7,7 +7,8 @@ class Message(object):
         self.touser = touser
         self.fromuser = fromuser
         self.create_time = int(create_time)
-        self.msg_id = int(msg_id)
+        if msg_id:
+            self.msg_id = int(msg_id)
 
 
 class TextMessage(Message):
@@ -39,6 +40,7 @@ class ImageMessage(Message):
     pic_url - 图片连接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, pic_url):
+        super(ImageMessage, self).__init__(touser, fromuser, create_time, msg_id)
         self.msg_type = "image"
         self.pic_url = pic_url
 
@@ -54,6 +56,7 @@ class LinkMessage(Message):
     url - 消息链接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, title, description, url):
+        super(LinkMessage, self).__init__(touser, fromuser, create_time, msg_id)
         self.msg_type = "link"
         self.title = title
         self.description = description
@@ -72,7 +75,8 @@ class LocationMessage(Message):
 
     label - 地理位置信息
     """
-    def __init__(self, tosuer, fromuser, create_time, msg_id, x, y, scale, label):
+    def __init__(self, touser, fromuser, create_time, msg_id, x, y, scale, label):
+        super(LocationMessage, self).__init__(touser, fromuser, create_time, msg_id)
         self.msg_type = "location"
         self.x = x
         self.y = y
@@ -89,7 +93,7 @@ class EventMessage(Message):
     event_key - 时间Key值，对应自定义菜单中的Key
     """
     def __init__(self, touser, fromuser, create_time, msg_id, event, event_key):
-        super(EventMessage, self).__init__()
+        super(EventMessage, self).__init__(touser, fromuser, create_time, msg_id)
         self.msg_type = "event"
         self.event = event
         self.event_key = event_key
