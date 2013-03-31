@@ -1,6 +1,6 @@
 # coding: utf8
 
-from time import time
+import time
 from util import to_unicode
 import logging
 
@@ -10,7 +10,7 @@ class Reply(object):
     def __init__(self, touser, fromuser, func_flag):
         self.touser = touser
         self.fromuser = fromuser
-        self.create_time = int(time())
+        self.create_time = int(time.time())
         self.func_flag = func_flag
 
     def to_xml(self):
@@ -145,6 +145,10 @@ class ArticleReply(Reply):
         return self.xml_template % args
 
 
+def now():
+    return time.strftime("%Y-%m-%d %H:%M:%S")
+
+
 def generate_reply(msg):
     args = dict(
         touser=msg.fromuser,
@@ -152,7 +156,9 @@ def generate_reply(msg):
         func_flag=0
     )
     if msg.msg_type == 'text':
-        args['content'] = msg.content
+        args['content'] = "溺社撒！？"
+        if msg.content.strip() == 'time':
+            args['content'] = now()
         logging.info(args)
         return TextReply(**args)
     if msg.msg_type == "event":
