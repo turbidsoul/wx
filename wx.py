@@ -16,7 +16,7 @@
 #
 import webapp2
 import logging
-from util import checkSignure, parse_messsage, to_unicode
+from util import checkSignure, parse_message, to_unicode
 from reply import generate_reply
 
 token = 'wxturbidsoul'
@@ -46,7 +46,7 @@ class WXChartHandler(webapp2.RequestHandler):
         )
         if not checkSignure(**_args):
             return webapp2.abort(403)
-        message = parse_messsage(self.request.body)
+        message = parse_message(self.request.body)
         reply = generate_reply(message)
         logging.info("=============== wx.py at line 50 ===============")
         logging.info(reply.to_xml())
