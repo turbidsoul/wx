@@ -53,5 +53,4 @@ class WXChartHandler(webapp2.RequestHandler):
         self.response.content_type = 'application/xml'
         self.response.write(to_unicode(reply.to_xml()))
 
-app = webapp2.WSGIApplication([('/', WXChartHandler)],
-                              debug=True)
+app = webapp2.WSGIApplication([('/', WXChartHandler)], debug=True)

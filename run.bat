@@ -1,1 +1,1 @@
-python "e:\server\appengine\dev_appserver.py" ../wx
+python "f:\server\google_appengine\dev_appserver.py" ../wx

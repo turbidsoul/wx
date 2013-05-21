@@ -1,36 +1,32 @@
-*.py[cod]
-
-# C extensions
-*.so
-
-# Packages
-*.egg
-*.egg-info
+.project
+.tags_sorted_by_file
+.tox
 dist
-build
-eggs
-parts
-bin
-var
+*.py[cod]
 sdist
-develop-eggs
 .installed.cfg
-lib
-lib64
-__pycache__
-
+.tags
 # Installer logs
 pip-log.txt
-
+*.so
+develop-eggs
+*.egg
+parts
+build
+var
+lib64
 # Unit test / coverage reports
-.coverage
-.tox
+bin
 nosetests.xml
-
-# Translations
-*.mo
-
-# Mr Developer
-.mr.developer.cfg
-.project
 .pydevproject
+eggs
+*.egg-info
+# C extensions
+# Translations
+# Packages
+lib
+# Mr Developer
+__pycache__
+.coverage
+*.mo
+.mr.developer.cfg
