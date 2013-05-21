@@ -25,7 +25,7 @@ def to_unicode(value):
     return value
 
 
-def parse_messsage(xml):
+def parse_message(xml):
     '''Parse from weixin receive xml to message '''
     if not xml:
         return

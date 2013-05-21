@@ -159,6 +159,9 @@ def generate_reply(msg):
         args['content'] = "溺社撒！？"
         if msg.content.strip() == 'time':
             args['content'] = now()
+        elif msg.content.strip().startswith('search:'):
+            search_content = msg.content.strip()[7:]
+            
         logging.info(args)
         return TextReply(**args)
     if msg.msg_type == "event":
