@@ -31,8 +31,8 @@ class ClientLoginException(Exception):
     pass
 
 
-email = "td816@163.com"
-password = "ubuntulinux"
+email = "xxxxx@163.com"
+password = "xxxxxx"
 
 login_url = "http://mp.weixin.qq.com/cgi-bin/login?lang=en_US"
 
