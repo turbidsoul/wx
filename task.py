@@ -11,6 +11,7 @@ class TestTaskWorker(webapp2.RequestHandler):
     def get(self):
         p = Push(settings.email, settings.password)
         p.login()
+        p.send_txt_msg("5636455", "定时发送")
 
 
 app = webapp2.WSGIApplication([('/task/test', TestTaskWorker)], debug=True)

@@ -37,6 +37,7 @@ def test_push_msg():
     p = push.Push(settings.email, settings.password)
     p.login()
     print(p.token)
-    p.send_txt_msg('5636455', '测试测试推送消息')
+    result = p.send_txt_msg('5636455', '测试测试推送消息')
+    print("推送成功" if result else "推送失败")
 
 test_push_msg()

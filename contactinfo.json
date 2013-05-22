@@ -1,0 +1,26 @@
+{
+    "FakeId": "5636455",
+    "NickName": "天独",
+    "ReMarkName": "",
+    "Username": "InnateSolitary",
+    "Signature": "啥？",
+    "Country": "中国",
+    "Province": "陕西",
+    "City": "西安",
+    "Sex": "1",
+    "GroupID": "2",
+    "Groups": [
+        {
+            "GroupId": "0",
+            "GroupName": "未分组"
+        },
+        {
+            "GroupId": "1",
+            "GroupName": "黑名单"
+        },
+        {
+            "GroupId": "2",
+            "GroupName": "星标组"
+        }
+    ]
+}
