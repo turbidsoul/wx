@@ -14,7 +14,6 @@ class Push(object):
     """
     推送消息
     """
-
     login_url = "http://mp.weixin.qq.com/cgi-bin/login?lang=en_US"
     referer_url = 'http://mp.weixin.qq.com/cgi-bin/singlemsgpage?fromfakeid=%s&msgid=&source=&count=20&t=wxm-singlechat&lang=zh_CN'
     single_send_url = 'https://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&lang=zh_CN'
@@ -50,8 +49,8 @@ body = (
 
 opener = poster.streaminghttp.register_openers()
 opener.add_handler(urllib2.HTTPCookieProcessor(cookielib.CookieJar()))
-opener.addheaders = [(
-    'Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
+opener.addheaders = [
+    ('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
     ('Accept-Charset', 'GBK,utf-8;q=0.7,*;q=0.3'),
     ('Accept-Encoding', 'gzip,deflate,sdch'),
     ('Cache-Control', 'max-age=0'),
@@ -60,7 +59,8 @@ opener.addheaders = [(
     ('Origin', 'mp.weixin.qq.com'),
     ('X-Requested-With', 'XMLHttpRequest'),
     ('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.22 '
-     '(KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22')]
+     '(KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22')
+]
 
 try:
     msg = json.loads(opener.open(
