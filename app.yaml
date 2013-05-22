@@ -13,6 +13,11 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+
+- url: /task/.*
+  script: task.app
+  login: admin
+
 - url: .*
   script: wx.app
 
