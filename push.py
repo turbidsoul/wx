@@ -7,6 +7,7 @@ import json
 import poster
 import cookielib
 import time
+import settings
 
 
 class Push(object):
@@ -31,8 +32,8 @@ class ClientLoginException(Exception):
     pass
 
 
-email = "xxxxx@163.com"
-password = "xxxxxx"
+email = settings.email
+password = settings.password
 
 login_url = "http://mp.weixin.qq.com/cgi-bin/login?lang=en_US"
 
