@@ -1,0 +1,4 @@
+cron:
+- description: test task worker
+  url: /task/test
+  schedule: every 1 minutes
