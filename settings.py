@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
-email = 'xxxx@email.com'
-password = 'password'
+email = 'xxxxxxxxxxxxxxxxxx@email.com'
+password = 'xxxxxxxxxxxxxxx'
 header = [(
     'Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'),
     ('Accept-Charset', 'GBK,utf-8;q=0.7,*;q=0.3'),
