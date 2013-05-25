@@ -49,8 +49,6 @@ class WXChartHandler(webapp2.RequestHandler):
             return webapp2.abort(403)
         message = parse_message(self.request.body)
         reply = generate_reply(message)
-        logging.info("=============== wx.py at line 50 ===============")
-        logging.info(reply.to_xml())
         self.response.content_type = 'application/xml'
         self.response.write(to_unicode(reply.to_xml()))
 

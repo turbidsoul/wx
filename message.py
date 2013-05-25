@@ -3,9 +3,11 @@
 import xml.etree.cElementTree as et
 import logging
 from util import to_unicode
+from model import WXUser as user
 
 
 class Message(object):
+
     """Wei chart super class"""
     def __init__(self, touser, fromuser, create_time, msg_id):
         self.touser = touser
@@ -16,6 +18,7 @@ class Message(object):
 
 
 class TextMessage(Message):
+
     """
     Text message
 
@@ -30,7 +33,8 @@ class TextMessage(Message):
     content - 文本消息内容
     """
     def __init__(self, touser, fromuser, create_time, msg_id, content):
-        super(TextMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        super(TextMessage, self).__init__(
+            touser, fromuser, create_time, msg_id)
         self.content = content
         if self.content == 'Hello2BizUser':
             self.msg_type = 'hello'
@@ -38,18 +42,21 @@ class TextMessage(Message):
 
 
 class ImageMessage(Message):
+
     """
     Image message
 
     pic_url - 图片连接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, pic_url):
-        super(ImageMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        super(ImageMessage, self).__init__(
+            touser, fromuser, create_time, msg_id)
         self.msg_type = "image"
         self.pic_url = pic_url
 
 
 class LinkMessage(Message):
+
     """
     Link message
 
@@ -60,7 +67,8 @@ class LinkMessage(Message):
     url - 消息链接
     """
     def __init__(self, touser, fromuser, create_time, msg_id, title, description, url):
-        super(LinkMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        super(LinkMessage, self).__init__(
+            touser, fromuser, create_time, msg_id)
         self.msg_type = "link"
         self.title = title
         self.description = description
@@ -68,6 +76,7 @@ class LinkMessage(Message):
 
 
 class LocationMessage(Message):
+
     """
     Location Message
 
@@ -80,7 +89,8 @@ class LocationMessage(Message):
     label - 地理位置信息
     """
     def __init__(self, touser, fromuser, create_time, msg_id, x, y, scale, label):
-        super(LocationMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        super(LocationMessage, self).__init__(
+            touser, fromuser, create_time, msg_id)
         self.msg_type = "location"
         self.x = x
         self.y = y
@@ -89,21 +99,30 @@ class LocationMessage(Message):
 
 
 class EventMessage(Message):
+
     """
     Event push message
 
+    每次有订阅事件是，都会登录到微信，并同步数据用于推送，如果用户退订信息，暂时还无法处理
+
     event - 事件类型，有subscribe(订阅), unsubscribe(取消订阅)， CLICK(自定义菜单点击事件)
 
-    event_key - 时间Key值，对应自定义菜单中的Key
+    event_key - 事件Key值，对应自定义菜单中的Key
     """
     def __init__(self, touser, fromuser, create_time, msg_id, event, event_key):
-        super(EventMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        super(EventMessage, self).__init__(
+            touser, fromuser, create_time, msg_id)
         self.msg_type = "event"
         self.event = event
         self.event_key = event_key
+        if event == "subscribe":
+
+        elif event == "unsubscribe":
+            pass
 
 
 class ErrorMessage(object):
+
     """错误消息"""
     def __init__(self, errcode, errmsg):
         self.errcode = errcode

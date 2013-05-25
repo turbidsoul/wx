@@ -1,5 +1,6 @@
 # -*- coding: utf8 -*-
 
+
 # wx config
 wx_email = 'xxxxxxxxxxxxxxxxxx@email.com'
 wx_password = 'xxxxxxxxxxxxxxx'
@@ -18,8 +19,9 @@ wx_header = [(
 wx_login_url = "http://mp.weixin.qq.com/cgi-bin/login?lang=en_US"
 wx_send_msg_referer_url = 'http://mp.weixin.qq.com/cgi-bin/singlemsgpage?fromfakeid=%s&msgid=&source=&count=20&t=wxm-singlechat&lang=zh_CN'
 wx_single_send_url = 'https://mp.weixin.qq.com/cgi-bin/singlesend?t=ajax-response&lang=zh_CN'
-wx_contact_url = 'https://mp.weixin.qq.com/cgi-bin/getcontactinfo?t=ajax-getcontactinfo&lang=zh_CN&fakeid=%s'
-
+wx_contact_info_url = 'https://mp.weixin.qq.com/cgi-bin/getcontactinfo?t=ajax-getcontactinfo&lang=zh_CN&fakeid=%s'
+wx_contact_url = 'https://mp.weixin.qq.com/cgi-bin/contactmanagepage?token=%s&t=wxm-friend&lang=zh_CN&pagesize=10&pageidx=0&type=0&groupid=%d'
+wx_index_url = 'https://mp.weixin.qq.com/cgi-bin/indexpage?t=wxm-index&token=%s&lang=zh_CN'
 
 wx_ungrouped = 0
 wx_blacklist = 1

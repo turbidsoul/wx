@@ -1,4 +1,9 @@
 cron:
-- description: test task worker
-  url: /task/test
-  schedule: every 5 minutes
+# - description: test task worker
+#   url: /task/test
+#   schedule: every 5 minutes
+
+- description: weather timed reminder
+  url: /task/weather
+  schedule: every day 06:30
+  timezone: Asia/Shanghai

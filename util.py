@@ -11,6 +11,9 @@ def checkSignure(token, timestamp, nonce, signature):
 
 
 def to_unicode(value):
+    """
+    编码转换
+    """
     if isinstance(value, unicode):
         return value
     if isinstance(value, basestring):
@@ -20,3 +23,28 @@ def to_unicode(value):
     if isinstance(value, bytes):
         return value.decode('utf-8')
     return value
+
+
+def singleton(cls, *args, **kw):
+    """
+    单例
+
+    @singleton
+    class ClassName(object):
+        pass
+    """
+    instances = {}
+
+    def getinstance(*args, **kw):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kw)
+        return instances[cls]
+    return getinstance
+
+
+def sync_user(email=None, pwd=None):
+    if email:
+        email = settings.wx_email
+    if pwd:
+        pwd = settings.wx_password
+    p = Push()
