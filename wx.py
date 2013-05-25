@@ -16,8 +16,9 @@
 #
 import webapp2
 import logging
-from util import checkSignure, parse_message, to_unicode
+from util import checkSignure, to_unicode
 from reply import generate_reply
+from message import parse_message
 
 token = 'wxturbidsoul'
 

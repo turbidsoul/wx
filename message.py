@@ -1,5 +1,9 @@
 # coding: utf8
 
+import xml.etree.cElementTree as et
+import logging
+from util import to_unicode
+
 
 class Message(object):
     """Wei chart super class"""
@@ -104,3 +108,43 @@ class ErrorMessage(object):
     def __init__(self, errcode, errmsg):
         self.errcode = errcode
         self.errmsg = errmsg
+
+
+def parse_message(xml):
+    '''Parse from weixin receive xml to message '''
+    if not xml:
+        return
+    logging.info(xml)
+    root = et.fromstring(xml)
+    _msg = dict(
+        touser=root.find('ToUserName').text,
+        fromuser=root.find('FromUserName').text,
+        create_time=root.find('CreateTime').text
+    )
+    msg_type = root.find('MsgType').text
+    if msg_type == 'text':
+        _msg['content'] = to_unicode(root.find('Content').text)
+        _msg['msg_id'] = root.find('MsgId').text
+        return TextMessage(**_msg)
+    elif msg_type == 'image':
+        _msg['pic_url'] = root.find('PicUrl').text
+        _msg['msg_id'] = root.find('MsgId').text
+        return ImageMessage(**_msg)
+    elif msg_type == 'location':
+        _msg['x'] = root.find('Location_x').text
+        _msg['y'] = root.find('Location_y').text
+        _msg['scale'] = root.find('Scale').text
+        _msg['label'] = to_unicode(root.find('Label').text)
+        _msg['msg_id'] = root.find('MsgId').text
+        return LocationMessage(**_msg)
+    elif msg_type == 'link':
+        _msg['title'] = to_unicode(root.find('Title').text)
+        _msg['description'] = to_unicode(root.find('Description').text)
+        _msg['url'] = root.find('Url').text
+        _msg['msg_id'] = root.find('MsgId').text
+        return LinkMessage(**_msg)
+    elif msg_type == 'event':
+        _msg['event'] = root.find('Event').text
+        _msg['event_key'] = root.find('EventKey').text
+        _msg['msg_id'] = None
+        return EventMessage(**_msg)
