@@ -10,6 +10,8 @@ import time
 import settings
 import logging
 from util import singleton
+from bs4 import BeautifulSoup as bs
+from model import WXUser as user
 
 
 @singleton
@@ -99,8 +101,17 @@ class Push(object):
 
     def get_contact_by_group(self, groupid=2):
         self.login_unless_not()
-        self.opener.addheaders += [('Referer': settings.wx_index_url % self.token)]
-        self.opener.open(settings.wx_contact_url % (self.token, settings.started))
+        self.opener.addheaders += [('Referer', settings.wx_index_url % self.token)]
+        html = self.opener.open(settings.wx_contact_url % (self.token, groupid)).read()
+        users_json = json.loads(bs(html).findAll(id="json-friendList")[0].text)
+        for i in xrange(0, len(users_json)):
+            user_json = users_json[i]
+            u = user()
+            u.nickname = user_json['nickName']
+            u.fake_id = user_json['fakeId']
+            u.remark_name = user_json['remarkName']
+            u.group_id = user_json['groupId']
+            u.save()
 
 
 class PushException(Exception):
