@@ -161,7 +161,6 @@ def generate_reply(msg):
             args['content'] = now()
         elif msg.content.strip().startswith('search:'):
             search_content = msg.content.strip()[7:]
-            
         logging.info(args)
         return TextReply(**args)
     if msg.msg_type == "event":

@@ -102,16 +102,23 @@ class Push(object):
     def get_contact_by_group(self, groupid=2):
         self.login_unless_not()
         self.opener.addheaders += [('Referer', settings.wx_index_url % self.token)]
-        html = self.opener.open(settings.wx_contact_url % (self.token, groupid)).read()
+        try:
+            html = self.opener.open(settings.wx_contact_url % (self.token, groupid)).read()
+        except Exception, e:
+            logging.error(e.message, e)
+            return
         users_json = json.loads(bs(html).findAll(id="json-friendList")[0].text)
+        users = []
         for i in xrange(0, len(users_json)):
             user_json = users_json[i]
             u = user()
             u.nickname = user_json['nickName']
             u.fake_id = user_json['fakeId']
             u.remark_name = user_json['remarkName']
-            u.group_id = user_json['groupId']
+            u.group_id = int(user_json['groupId'])
             u.save()
+            users.append(u)
+        return users
 
 
 class PushException(Exception):
