@@ -1,8 +1,8 @@
 # coding: utf8
 import hashlib
 import httplib
-import settings
 import push
+from push import Push
 
 
 def test_receve_msg():
@@ -34,10 +34,19 @@ def test_receve_msg():
 
 
 def test_push_msg():
-    p = push.Push(settings.email, settings.password)
+    p = push.Push("td816@163.com", "ubuntulinux")
     p.login()
     print(p.token)
+    print(p.cookie)
+    print(p)
     result = p.send_txt_msg('5636455', '测试测试推送消息')
     print("推送成功" if result else "推送失败")
+
+
+def test_singleton():
+    p = Push()
+    print(p)
+    p = Push()
+    print(p)
 
 test_push_msg()
