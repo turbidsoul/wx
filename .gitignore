@@ -30,3 +30,6 @@ __pycache__
 .coverage
 *.mo
 .mr.developer.cfg
+
+#sublime
+*.sublime-project
