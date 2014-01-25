@@ -133,6 +133,36 @@ class ErrorMessage(object):
         self.errmsg = errmsg
 
 
+class VoiceMessage(Message):
+    """
+    Voice Message
+    MediaId - 语音消息媒体id，可以调用多媒体文件下载接口拉取数据。
+
+    Format - 语音格式，如amr，speex等 语音格式，如amr，speex等
+    """
+    def __init__(self, touser, fromuser, create_time, msg_id, media_id, format):
+        super(VoiceMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        self.media_id = media_id
+        self.format = format
+        self.msg_type = 'voice'
+
+
+class VideoMessage(Message):
+    """
+    Video Message
+
+    MediaId - 视频消息媒体id，可以调用多媒体文件下载接口拉取数据。
+
+    ThumbMediaId - 视频消息缩略图的媒体id，可以调用多媒体文件下载接口拉取数据。
+    """
+    def __init__(self, touser, fromuser, create_time, msg_id, media_id, thumb_media_id):
+        super(VideoMessage, self).__init__(touser, fromuser, create_time, msg_id)
+        self.media_id = media_id
+        self.thumb_media_id = thumb_media_id
+        self.msg_type = 'video'
+
+
+
 def parse_message(xml):
     '''Parse from weixin receive xml to message '''
     if not xml:
