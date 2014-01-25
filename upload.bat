@@ -1,1 +1,0 @@
-python.exe  E:\server\appengine\appcfg.py update ../wx

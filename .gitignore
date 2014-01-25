@@ -33,3 +33,4 @@ __pycache__
 
 #sublime
 *.sublime-project
+*.sublime-workspace
