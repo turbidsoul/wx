@@ -1,2 +1,7 @@
 name: wx robot
 version: 1
+
+
+libraries:
+    - name: "bottle"
+      version: "0.11.6"

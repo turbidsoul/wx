@@ -1,14 +1,10 @@
 
-
+import os
+import sys
+root = os.path.dirname(__file__)
+sys.path.insert(0, os.path.join(root, "site-packages"))
 
 import sae
-
-
-def app(environ, start_response):
-    status = '200 OK'
-    response_headers = [('Content-Type', 'text/plain')]
-    start_response(status, response_headers)
-    return ['Hello, world!']
-
+from wx import app
 
 application = sae.create_wsgi_app(app)

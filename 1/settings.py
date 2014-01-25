@@ -2,6 +2,7 @@
 
 
 # wx config
+token = "wxturbidsoul"
 wx_email = 'td816@163.com'
 wx_password = 'ubuntulinux'
 wx_header = [(
