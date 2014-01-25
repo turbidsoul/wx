@@ -1,11 +1,9 @@
 # coding: utf8
 import hashlib
-import httplib
-import push
-from push import Push
+import requests
 
 
-def test_receve_msg():
+def test_receve_signature():
     headers = {
         "Content-Type": "application/xml"
     }
@@ -25,28 +23,33 @@ def test_receve_msg():
     args = [timestamp, nonce, token]
     args.sort()
     signature = hashlib.sha1("".join(args)).hexdigest()
-    url = "?timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr + "&signature=" + signature
-    conn = httplib.HTTPConnection(host="127.0.0.1", port=8080)
-    conn.request(method='POST', url=url, body=xml, headers=headers)
-    response = conn.getresponse()
-    print response.read()
-    conn.close()
+    url = "http://localhost:8080/?timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr + "&signature=" + signature
+    response = requests.get(url, data=xml, headers=headers)
+    print response.text
 
 
-def test_push_msg():
-    p = push.Push("td816@163.com", "ubuntulinux")
-    p.login()
-    print(p.token)
-    print(p.cookie)
-    print(p)
-    result = p.send_txt_msg('5636455', '测试测试推送消息')
-    print("推送成功" if result else "推送失败")
+def test_receve_textmsg():
+    headers = {
+        "Content-Type": "application/xml"
+    }
 
+    xml = """<xml><ToUserName><![CDATA[gh_081abfe3962c]]></ToUserName>
+    <FromUserName><![CDATA[oCT3bjgZ2GysH7vAz9sJK32DHZAs]]></FromUserName>
+    <CreateTime>1363672441</CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content>this is a text message</Content>
+    <MsgId>1234567890123456</MsgId>
+    </xml>"""
 
-def test_singleton():
-    p = Push()
-    print(p)
-    p = Push()
-    print(p)
+    timestamp = "12345678"
+    nonce = "1234"
+    token = "wxturbidsoul"
+    args = [timestamp, nonce, token]
+    args.sort()
+    signature = hashlib.sha1("".join(args)).hexdigest()
+    url = "http://localhost:8080/?timestamp=" + timestamp + "&nonce=" + nonce + "&signature=" + signature
+    response = requests.post(url, data=xml, headers=headers)
+    print response.text.decode('gbk').encode('utf8')
 
-test_push_msg()
+test_receve_textmsg()
+

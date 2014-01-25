@@ -16,12 +16,12 @@
 #
 import logging
 
-from bottle import abort, default_app, error, request, route
+from bottle import abort, default_app, error, request, route, response
 from settings import token
-from util import checkSignure
+from util import checkSignure, to_unicode
 
-# from reply import generate_reply
-# from message import parse_message
+from reply import generate_reply
+from message import parse_message
 
 
 
@@ -71,6 +71,31 @@ def wx_signature():
     else:
         logging.info("connection wx rebot fail")
         abort(403, 'connection wx rebot fail')
+
+
+@route('/', method='POST')
+def wx_message():
+    params = request.params
+    signature = params['signature']
+    timestamp = params['timestamp']
+    nonce = params['nonce']
+    _args = {
+        "token": token,
+        "signature": signature,
+        "timestamp": timestamp,
+        "nonce": nonce
+    }
+    if not signature or not timestamp or not nonce:
+        logging.error('check signature failed')
+        abort(403, 'check siginure failed')
+    if not checkSignure(**_args):
+        abort(403)
+    print(request.body.getvalue())
+    message = parse_message(request.body.getvalue())
+    reply = generate_reply(message)
+    response.set_header("Content-Type", 'application/xml')
+    return to_unicode(reply.to_xml())
+
 
 @route('/hello')
 @route('/hello/')
