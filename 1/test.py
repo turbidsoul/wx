@@ -37,7 +37,7 @@ def test_receve_textmsg():
     <FromUserName><![CDATA[oCT3bjgZ2GysH7vAz9sJK32DHZAs]]></FromUserName>
     <CreateTime>1363672441</CreateTime>
     <MsgType><![CDATA[text]]></MsgType>
-    <Content>this is a text message</Content>
+    <Content>时间</Content>
     <MsgId>1234567890123456</MsgId>
     </xml>"""
 

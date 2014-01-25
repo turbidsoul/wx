@@ -145,8 +145,14 @@ class ArticleReply(Reply):
         return self.xml_template % args
 
 
-def now():
+def _now():
     return time.strftime("%Y-%m-%d %H:%M:%S")
+
+def _today():
+    return time.strftime('%Y-%m-%d')
+
+def _time():
+    return time.strftime('%H:%m:%S')
 
 
 def generate_reply(msg):
@@ -157,8 +163,12 @@ def generate_reply(msg):
     )
     if msg.msg_type == 'text':
         args['content'] = "溺社撒！？"
-        if msg.content.strip() == 'time':
-            args['content'] = now()
+        if msg.content.strip() == 'datetime' or msg.content.strip().encode('utf8') == "时间":
+            args['content'] = _now()
+        elif msg.content.strip() == 'date':
+            args['content'] = _today()
+        elif msg.content.strip() == 'time':
+            args['content'] = _time()
         elif msg.content.strip().startswith('search:'):
             search_content = msg.content.strip()[7:]
         logging.info(args)
