@@ -3,11 +3,12 @@
 # @Author: Turbidsoul
 # @Date:   2014-01-24 16:20:13
 # @Last Modified by:   Turbidsoul
-# @Last Modified time: 2014-01-26 11:17:42
+# @Last Modified time: 2014-01-26 12:00:57
 import hashlib
 import requests
 from settings import weather3_url
 from util import checkSignure, to_unicode, singleton
+from pypinyin import slug
 
 
 def test_receve_signature():
@@ -95,3 +96,19 @@ def test_singleton():
     t21 = Test2()
     t22 = Test2()
     assert not t21 == t22
+
+
+def test_pinyin():
+    response = requests.get("http://m.weather.com.cn/data5/city.xml?level=0")
+    print(response.text)
+    print("-" * 30)
+    response = requests.get("http://m.weather.com.cn/data5/city01.xml?level=1")
+    print(response.text)
+    print("-" * 30)
+    response = requests.get("http://m.weather.com.cn/data5/city0101.xml?level=2")
+    print(response.text)
+    response = requests.get("http://m.weather.com.cn/data5/city010102.xml?level=3")
+    print(response.text)
+
+
+test_pinyin()
