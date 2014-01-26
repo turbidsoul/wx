@@ -1,6 +1,13 @@
-# coding: utf8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Author: Turbidsoul
+# @Date:   2014-01-24 16:20:13
+# @Last Modified by:   Turbidsoul
+# @Last Modified time: 2014-01-26 11:12:24
 
 import time
+
+import requests
 from util import to_unicode
 
 
@@ -154,6 +161,10 @@ def _time():
     return time.strftime('%H:%M:%S')
 
 
+def _weather(city):
+    requests.get()
+
+
 def generate_reply(msg):
     args = dict(
         touser=msg.fromuser,
@@ -168,6 +179,9 @@ def generate_reply(msg):
             args['content'] = _today()
         elif msg.content.strip() == 'time':
             args['content'] = _time()
+        elif args['content'].endswith("天气"):
+            pass
+
         return TextReply(**args)
     if msg.msg_type == "event":
         if msg.event == "subscribe":
