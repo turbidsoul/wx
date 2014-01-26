@@ -1,7 +1,12 @@
-# coding: utf8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Author: Turbidsoul
+# @Date:   2014-01-24 16:20:13
+# @Last Modified by:   Turbidsoul
+# @Last Modified time: 2014-01-26 11:05:43
 import hashlib
 import requests
-import xml.etree.cElementTree as et
+from settings import weather3_url
 
 def test_receve_signature():
     headers = {
@@ -56,7 +61,8 @@ def test_xinzhi_weather_api():
     f = open('weathercity.code.txt', 'rb')
     wc = f.read()
     wcmap = {}
-    # [wcmap[code.split(":")[0]]=code.split(":")[] for code in wc.split("|")]
-
-
+    wcmap = dict([tuple(code.split(',')) for code in wc.split('|') if len(code.split(',')) == 2])
+    assert wcmap['陕西西安'] == '101110101'
+    response = requests.get(weather3_url % wcmap['陕西西安'])
+    assert response.status_code == 200
 

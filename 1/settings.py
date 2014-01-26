@@ -30,7 +30,6 @@ wx_starred = 2
 
 # weather url
 weather_base_url = 'www.weather.com.cn'
-weather1_url = "http://www.weather.com.cn/data/sk/%d.html"
-weather2_url = "http://www.weather.com.cn/data/cityinfo/%d.html"
-weather3_url = "http://m.weather.com.cn/data/%d.html"
-weather_city = 101110101
+weather1_url = "http://www.weather.com.cn/data/sk/%s.html"
+weather2_url = "http://www.weather.com.cn/data/cityinfo/%s.html"
+weather3_url = "http://m.weather.com.cn/data/%s.html"
