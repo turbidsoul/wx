@@ -2,7 +2,6 @@
 
 import time
 from util import to_unicode
-import logging
 
 
 class Reply(object):
@@ -152,7 +151,7 @@ def _today():
     return time.strftime('%Y-%m-%d')
 
 def _time():
-    return time.strftime('%H:%m:%S')
+    return time.strftime('%H:%M:%S')
 
 
 def generate_reply(msg):
@@ -169,9 +168,6 @@ def generate_reply(msg):
             args['content'] = _today()
         elif msg.content.strip() == 'time':
             args['content'] = _time()
-        elif msg.content.strip().startswith('search:'):
-            search_content = msg.content.strip()[7:]
-        logging.info(args)
         return TextReply(**args)
     if msg.msg_type == "event":
         if msg.event == "subscribe":

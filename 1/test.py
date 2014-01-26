@@ -1,7 +1,7 @@
 # coding: utf8
 import hashlib
 import requests
-
+import xml.etree.cElementTree as et
 
 def test_receve_signature():
     headers = {
@@ -25,7 +25,7 @@ def test_receve_signature():
     signature = hashlib.sha1("".join(args)).hexdigest()
     url = "http://localhost:8080/?timestamp=" + timestamp + "&nonce=" + nonce + "&echostr=" + echostr + "&signature=" + signature
     response = requests.get(url, data=xml, headers=headers)
-    print response.text
+    assert response.text == 'test'
 
 
 def test_receve_textmsg():
@@ -49,7 +49,14 @@ def test_receve_textmsg():
     signature = hashlib.sha1("".join(args)).hexdigest()
     url = "http://localhost:8080/?timestamp=" + timestamp + "&nonce=" + nonce + "&signature=" + signature
     response = requests.post(url, data=xml, headers=headers)
-    print response.text.decode('gbk').encode('utf8')
+    assert response.status_code == 200
 
-test_receve_textmsg()
+
+def test_xinzhi_weather_api():
+    f = open('weathercity.code.txt', 'rb')
+    wc = f.read()
+    wcmap = {}
+    # [wcmap[code.split(":")[0]]=code.split(":")[] for code in wc.split("|")]
+
+
 

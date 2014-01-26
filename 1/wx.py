@@ -22,37 +22,7 @@ from util import checkSignure, to_unicode
 
 from reply import generate_reply
 from message import parse_message
-
-
-
-# class WXChartHandler(webapp2.RequestHandler):
-#     def get(self):
-#         global token
-#         signature = self.request.get('signature')
-#         timestamp = self.request.get('timestamp')
-#         nonce = self.request.get('nonce')
-#         echostr = self.request.get('echostr')
-#         if checkSignure(token, timestamp, nonce, signature):
-#             logging.info("connection wx rebot success")
-#             self.response.write(echostr)
-#         else:
-#             logging.info("connection wx rebo fail")
-#             webapp2.abort(403)
-
-#     def post(self):
-#         global token
-#         _args = dict(
-#             token=token,
-#             timestamp=self.request.get('timestamp'),
-#             nonce=self.request.get('nonce'),
-#             signature=self.request.get('signature')
-#         )
-#         if not checkSignure(**_args):
-#             return webapp2.abort(403)
-#         message = parse_message(self.request.body)
-#         reply = generate_reply(message)
-#         self.response.content_type = 'application/xml'
-#         self.response.write(to_unicode(reply.to_xml()))
+import sae
 
 
 @route('/', method='GET')

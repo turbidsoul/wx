@@ -2,9 +2,7 @@
 
 import xml.etree.cElementTree as et
 import logging
-import settings
 from util import to_unicode
-# from push import Push
 
 
 class Message(object):
@@ -117,9 +115,6 @@ class EventMessage(Message):
         self.event = event
         self.event_key = event_key
         if event == "subscribe":
-            # p = Push()
-            # p.login_unless_not()
-            # p.get_contact_by_group(settings.wx_ungrouped)
             pass
         elif event == "unsubscribe":
             pass
