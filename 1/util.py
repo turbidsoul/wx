@@ -31,9 +31,6 @@ def singleton(cls, *args, **kw):
     """
     单例
 
-    @singleton
-    class ClassName(object):
-        pass
     """
     instances = {}
 
