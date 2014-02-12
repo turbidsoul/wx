@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 # @Author: Turbidsoul
 # @Date:   2014-01-24 16:20:13
-# @Last Modified by:   Turbidsoul
-# @Last Modified time: 2014-01-26 12:00:57
+# @Last Modified by:   Turbidsoul Chen
+# @Last Modified time: 2014-02-12 15:17:02
 import hashlib
 import requests
 from settings import weather3_url
 from util import checkSignure, to_unicode, singleton
-from pypinyin import slug
 
 
 def test_receve_signature():

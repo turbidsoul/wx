@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # @Author: Turbidsoul
 # @Date:   2014-01-24 16:20:13
-# @Last Modified by:   Turbidsoul
-# @Last Modified time: 2014-01-26 11:12:24
+# @Last Modified by:   Turbidsoul Chen
+# @Last Modified time: 2014-02-12 15:16:31
 
 import time
 
@@ -181,6 +181,8 @@ def generate_reply(msg):
             args['content'] = _time()
         elif args['content'].endswith("天气"):
             pass
+        elif args['content'].startswith('osc:'):
+            content = args['content'][4:]
 
         return TextReply(**args)
     if msg.msg_type == "event":
